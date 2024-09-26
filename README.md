@@ -63,10 +63,8 @@ Plotly.js: For rendering charts and visualizations (optional depending on how yo
 
 git clone https://github.com/piyushsonigara04/MITWPU_TEAM6_FOREX.git
 
-2] Prepare the database: Ensure the ntx.db SQLite database is in the project directory with the necessary tables (e.g., currency).
+2] Run the server: python app.py
 
-3] Run the server: python app.py
+3] Access the API: The server will run on http://localhost:5000/.
 
-4] Access the API: The server will run on http://localhost:5000/.
-
-5] Run the frontend using npm run dev 
+4] Run the frontend using npm run dev 
