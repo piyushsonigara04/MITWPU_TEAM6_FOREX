@@ -67,4 +67,6 @@ git clone https://github.com/piyushsonigara04/MITWPU_TEAM6_FOREX.git
 
 3] Access the API: The server will run on http://localhost:5000/.
 
+4] Install node modules "npm i" and react dependencies as mentioned.
+
 4] Run the frontend using npm run dev 
