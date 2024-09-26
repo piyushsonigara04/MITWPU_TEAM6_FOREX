@@ -47,7 +47,7 @@ const Index = () => {
                     className="border border-gray-300 p-2 mr-2"
                     required
                 />
-                <button type="submit" className="bg-blue-500 text-white p-2 rounded">
+                <button type="submit" className="bg-indigo-600 rounded-lg hover:bg-indigo-500 text-white p-2">
                     Get Rates
                 </button>
             </form>

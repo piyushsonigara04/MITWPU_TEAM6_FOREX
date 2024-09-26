@@ -10,6 +10,33 @@ const PredictedCurrencyChart = () => {
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
 
+    const currencies = [
+        { symbol: 'DZD', name: 'Algerian dinar' },
+        { symbol: 'AUD', name: 'Australian dollar' },
+        { symbol: 'BRL', name: 'Brazilian real' },
+        { symbol: 'CAD', name: 'Canadian dollar' },
+        { symbol: 'CNY', name: 'Chinese yuan' },
+        { symbol: 'CZK', name: 'Czech koruna' },
+        { symbol: 'DKK', name: 'Danish krone' },
+        { symbol: 'EUR', name: 'Euro' },
+        { symbol: 'INR', name: 'Indian rupee' },
+        { symbol: 'JPY', name: 'Japanese yen' },
+        { symbol: 'MXN', name: 'Mexican peso' },
+        { symbol: 'NZD', name: 'New Zealand dollar' },
+        { symbol: 'NOK', name: 'Norwegian krone' },
+        { symbol: 'RUB', name: 'Russian ruble' },
+        { symbol: 'ZAR', name: 'South African rand' },
+        { symbol: 'KRW', name: 'South Korean won' },
+        { symbol: 'SEK', name: 'Swedish krona' },
+        { symbol: 'CHF', name: 'Swiss franc' },
+        { symbol: 'TWD', name: 'Taiwan dollar' },
+        { symbol: 'THB', name: 'Thai baht' },
+        { symbol: 'GBP', name: 'British pound' },
+        { symbol: 'USD', name: 'U.S. dollar' },
+        { symbol: 'HKD', name: 'Hong Kong dollar' },
+        { symbol: 'SGD', name: 'Singapore dollar' }
+    ];
+
     const fetchData = async () => {
         setLoading(true);
         setError(null);
@@ -38,20 +65,17 @@ const PredictedCurrencyChart = () => {
     const groupDataByPeriod = (data) => {
         const groupedData = {};
         
-        // Ensure forecast is available
         if (!data.forecast || !Array.isArray(data.forecast.ds) || !Array.isArray(data.forecast.yhat)) {
             console.warn("Forecast data is not structured correctly.");
             return [];
         }
 
-        // Loop through the forecast data
         for (let i = 0; i < data.forecast.ds.length; i++) {
             const date = new Date(data.forecast.ds[i]);
             const predictedValue = data.forecast.yhat[i];
             const lowerBound = data.forecast.yhat_lower[i];
             const upperBound = data.forecast.yhat_upper[i];
 
-            // Group by month
             const periodKey = `${date.getFullYear()}-${date.getMonth() + 1}`;
 
             if (!groupedData[periodKey]) {
@@ -63,7 +87,6 @@ const PredictedCurrencyChart = () => {
             groupedData[periodKey].count += 1;
         }
 
-        // Create an array from the grouped data
         return Object.entries(groupedData).map(([key, value]) => ({
             Date: key,
             PredictedValue: value.count > 0 ? value.total / value.count : 0,
@@ -121,16 +144,11 @@ const PredictedCurrencyChart = () => {
                 layout={{
                     title: `Predicted Currency Value Over Time (Monthly)`,
                     xaxis: { title: 'Date' },
-                    yaxis: { title: 'Predicted Value (USD)' },
+                    yaxis: { title: `Predicted Value (${currency})` },
                     showlegend: true,
                 }}
             />
         );
-    };
-
-    const handleCurrencyChange = (e) => {
-        const value = e.target.value.toUpperCase();
-        setCurrency(value);
     };
 
     return (
@@ -140,12 +158,17 @@ const PredictedCurrencyChart = () => {
                 <div>
                     <label className="block mb-2 text-sm font-medium text-gray-700">
                         Select Currency:
-                        <input
-                            type="text"
+                        <select
                             value={currency}
-                            onChange={handleCurrencyChange}
+                            onChange={(e) => setCurrency(e.target.value)}
                             className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                        />
+                        >
+                            {currencies.map(({ symbol, name }) => (
+                                <option key={symbol} value={symbol}>
+                                    {`${name} (${symbol})`}
+                                </option>
+                            ))}
+                        </select>
                     </label>
                 </div>
                 <div>

@@ -162,7 +162,7 @@ const CurrencyBasketPage = () => {
 
       <button
         onClick={handleSubmit}
-        className="bg-blue-500 text-white px-4 py-2 rounded-md shadow-sm"
+        className="bg-indigo-600 rounded-lg hover:bg-indigo-500 text-white px-4 py-2 shadow-sm"
       >
         Convert
       </button>

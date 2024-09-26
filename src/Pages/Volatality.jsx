@@ -10,6 +10,33 @@ const Volatility = () => {
   const [volatilityData, setVolatilityData] = useState(null);
   const [error, setError] = useState("");
 
+  const currencies = [
+    { symbol: 'DZD', name: 'Algerian dinar' },
+    { symbol: 'AUD', name: 'Australian dollar' },
+    { symbol: 'BRL', name: 'Brazilian real' },
+    { symbol: 'CAD', name: 'Canadian dollar' },
+    { symbol: 'CNY', name: 'Chinese yuan' },
+    { symbol: 'CZK', name: 'Czech koruna' },
+    { symbol: 'DKK', name: 'Danish krone' },
+    { symbol: 'EUR', name: 'Euro' },
+    { symbol: 'INR', name: 'Indian rupee' },
+    { symbol: 'JPY', name: 'Japanese yen' },
+    { symbol: 'MXN', name: 'Mexican peso' },
+    { symbol: 'NZD', name: 'New Zealand dollar' },
+    { symbol: 'NOK', name: 'Norwegian krone' },
+    { symbol: 'RUB', name: 'Russian ruble' },
+    { symbol: 'ZAR', name: 'South African rand' },
+    { symbol: 'KRW', name: 'South Korean won' },
+    { symbol: 'SEK', name: 'Swedish krona' },
+    { symbol: 'CHF', name: 'Swiss franc' },
+    { symbol: 'TWD', name: 'Taiwan dollar' },
+    { symbol: 'THB', name: 'Thai baht' },
+    { symbol: 'GBP', name: 'British pound' },
+    { symbol: 'USD', name: 'U.S. dollar' },
+    { symbol: 'HKD', name: 'Hong Kong dollar' },
+    { symbol: 'SGD', name: 'Singapore dollar' }
+  ];
+
   const fetchVolatility = async () => {
     try {
       const response = await axios.get("http://localhost:5000/api/volatility", {
@@ -34,20 +61,30 @@ const Volatility = () => {
 
       <div className="mt-4">
         <label className="block text-sm font-medium text-gray-700">Currency 1:</label>
-        <input
-          type="text"
+        <select
           value={currency1}
           onChange={(e) => setCurrency1(e.target.value)}
-          className="mt-1 p-2 border border-gray-300 rounded-md w-full"
-        />
+          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+        >
+          {currencies.map(({ symbol, name }) => (
+            <option key={symbol} value={symbol}>
+              {`${name} (${symbol})`}
+            </option>
+          ))}
+        </select>
 
         <label className="block text-sm font-medium text-gray-700 mt-4">Currency 2:</label>
-        <input
-          type="text"
+        <select
           value={currency2}
           onChange={(e) => setCurrency2(e.target.value)}
-          className="mt-1 p-2 border border-gray-300 rounded-md w-full"
-        />
+          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+        >
+          {currencies.map(({ symbol, name }) => (
+            <option key={symbol} value={symbol}>
+              {`${name} (${symbol})`}
+            </option>
+          ))}
+        </select>
 
         <label className="block text-sm font-medium text-gray-700 mt-4">Start Date:</label>
         <input
@@ -67,7 +104,7 @@ const Volatility = () => {
 
         <button
           onClick={fetchVolatility}
-          className="bg-blue-500 text-white px-4 py-2 rounded-md shadow-sm mt-4 hover:bg-blue-600 transition duration-300"
+          className="bg-indigo-600 rounded-lg hover:bg-indigo-500 text-white px-4 py-2 shadow-sm mt-4 transition duration-300"
         >
           Get Volatility
         </button>
