@@ -63,7 +63,7 @@ Plotly.js: For rendering charts and visualizations (optional depending on how yo
 
 git clone https://github.com/piyushsonigara04/MITWPU_TEAM6_FOREX.git
 
-2] Prepare the database: Ensure the ntx.db SQLite database is in the project directory with the necessary tables (e.g., currency).
+2] Ensure the ntx.db SQLite database is in the project directory .
 
 3] Run the server: python app.py
 
